@@ -9,42 +9,47 @@ import bagel.util.Point;
  */
 
 public class ShadowFlap extends AbstractGame {
-    // Static attributes
-    // public as utilised by other classes
-    public static final int SCREEN_WIDTH = 1024;
-    public static final int SCREEN_HEIGHT = 768;
-    public static final int FONT_SIZE = 48;
-    public static final Point MESSAGE_LOCATION = new Point(SCREEN_WIDTH/2.0, SCREEN_HEIGHT/2.0 + FONT_SIZE/2.0);
-    public static final String FONT_PATH = "res/font/slkscr.ttf";
-
-
-    private boolean lKeyWasDown = false;
-    private boolean kKeyWasDown = false;
-
-    public static final double RIGHT_TO_LEFT_SPEED = 3;
-    private double timeScale = 0;
-
-    public double getGameSpeed() {
-        return gameSpeed;
-    }
-
-    private static final double GAME_SPEED_MULTIPLYER = 1.5;
-    private double gameSpeed;
-
     private static final String GAME_TITLE = "ShadowFlap";
 
-    // Non-Static attributes
+    // public as utilised by other classes
+    /** The width of the game screen */
+    public static final int SCREEN_WIDTH = 1024;
+    /** The height of the game screen */
+    public static final int SCREEN_HEIGHT = 768;
+    /** The font size used through out the game */
+    public static final int FONT_SIZE = 48;
+    /** The location at which messages are displayed to player e.g. GAMEOVER */
+    public static final Point MESSAGE_LOCATION = new Point(SCREEN_WIDTH/2.0, SCREEN_HEIGHT/2.0 + FONT_SIZE/2.0);
+    private static final String FONT_PATH = "res/font/slkscr.ttf";
+    /** Font used throughout the game. */
     public final Font MESSAGE_FONT = new Font(ShadowFlap.FONT_PATH, ShadowFlap.FONT_SIZE);
 
+    // for time scale controls
+    private static final int MAX_GAME_SPEED = 4;
+    private boolean lKeyWasDown = false;
+    private boolean kKeyWasDown = false;
+    private double timeScale = 0;
+    private static final double GAME_SPEED_MULTIPLYER = 1.5;
+    private double gameSpeed;
+    /** The speed at which pipes weapon and flames move right to left by defult */
+    public static final double RIGHT_TO_LEFT_SPEED = 3;
+
+    // Keeps track of the level the game is running
     private Level currentLevelInstance;
     private Levels currentLevel = Levels.LEVEL_ZERO;
     private static ShadowFlap currentInstance;
+
 
     private ShadowFlap() {
         super(SCREEN_WIDTH, SCREEN_HEIGHT, GAME_TITLE);
         currentLevelInstance = new LevelZero();
         gameSpeed = calculateGameSpeed();
     }
+
+    /** Gets the current instance of the shaddow flap game, there can only be one instance at any time. This utilised
+     * the singleton design pattern
+     * @return ShadowFlap the current instance of the game.
+     */
     public static ShadowFlap getInstance(){
         if (currentInstance == null){
             currentInstance = new ShadowFlap();
@@ -67,60 +72,67 @@ public class ShadowFlap extends AbstractGame {
     @Override
     public void update(Input input){
         setTimescale(input);
-        if(currentLevelInstance instanceof LevelZero && currentLevel == Levels.LEVEL_ONE) {
-            System.exit(0);
-        }
-        //level one
         currentLevelInstance.runLevel(input);
     }
 
+    /** changes the game from level zero to level one. */
     public void levelUp(){
         assert currentLevel == Levels.LEVEL_ZERO && currentLevelInstance instanceof LevelZero;
         currentLevelInstance = new LevelOne();
         currentLevel = Levels.LEVEL_ONE;
     }
 
-    public double calculateGameSpeed() {
-
+    /* calculates mutiplayer for timescale controls
+     * @return the current multiplayer for time scale control.
+     */
+    private double calculateGameSpeed() {
         return Math.pow(GAME_SPEED_MULTIPLYER, timeScale);
     }
 
+    /** increases the game speed by one increment */
     public void incrmentTimeScale() {
-        if (timeScale < 4){
+        // game speed increase is capped
+        if (timeScale < MAX_GAME_SPEED){
             timeScale++;
             gameSpeed = calculateGameSpeed();
         }
     }
 
+    /** decreases the game speed by one increment */
     public void decremenTimeScale() {
+        // game speed cant be reduced below intial level.
         if (timeScale > 0){
             timeScale--;
             gameSpeed = calculateGameSpeed();
         }
     }
 
-    public Levels getCurrentLevel() {
-        return currentLevel;
-    }
-
+    /** sets the current time scale speed based on user input.
+     * @param input user input to contorl time scale
+     */
     private void setTimescale(Input input) {
+        // if K key is pressent decrement time scale
         if (input.isDown(Keys.K) && !kKeyWasDown) {
             kKeyWasDown = true;
             ShadowFlap.getInstance().decremenTimeScale();
-            System.out.println(ShadowFlap.getInstance().getGameSpeed());
         }
         if (input.isUp(Keys.K)) {
             kKeyWasDown = false;
         }
-
+        // if L key is pressed increment time scale
         if (input.isDown(Keys.L) && !lKeyWasDown) {
             lKeyWasDown = true;
             ShadowFlap.getInstance().incrmentTimeScale();
-            System.out.println(ShadowFlap.getInstance().getGameSpeed());
-
         }
         if (input.isUp(Keys.L)) {
             lKeyWasDown = false;
         }
+    }
+
+    /** gets the current game speed.
+     * @return double the current game speed levle.
+     */
+    public double getGameSpeed() {
+        return gameSpeed;
     }
 }

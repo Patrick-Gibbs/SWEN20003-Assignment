@@ -99,9 +99,11 @@ public class LevelOne extends Level{
             drawWinScreen();
         }
     }
+
+    //used to update what state the game is in e.g. game won, game lost.
     @Override
-    protected void updateGameState(Input input, Bird bird, ArrayList<PipeSet> pipes){
-        super.updateGameState(input, bird, pipes);
+    protected void updateGameState(Input input){
+        super.updateGameState(input);
         if (currentGameState == GameState.GAME_WON) {
             if (input.isDown(Keys.ESCAPE)) {
                 System.exit(0);
@@ -109,6 +111,7 @@ public class LevelOne extends Level{
         }
     }
 
+    // draws the relevant background on the screeen.
     @Override
     protected void drawBackground() {
         // Draws city background unless game is lost, in which case we draw the default background.
@@ -120,6 +123,7 @@ public class LevelOne extends Level{
         }
     }
 
+    // draws the starting screen message
     @Override
     protected void drawStartScreen() {
         super.drawStartScreen();
@@ -129,11 +133,13 @@ public class LevelOne extends Level{
         ShadowFlap.getInstance().MESSAGE_FONT.drawString(SHOOT_INSTRUCTIONS, shootMessageLocation.x, shootMessageLocation.y);
     }
 
+    // checks if the level is complete/won
     @Override
     protected boolean isLevelUp(Score score) {
         return score.getCurrent_score() >= SCORE_TO_WIN;
     }
 
+    // draws the message if the level is won
     @Override
     protected void drawWinScreen() {
         ShadowFlap.getInstance().MESSAGE_FONT.drawString(WIN_MESSAGE, MESSAGE_LOCATION.x - ShadowFlap.getInstance().MESSAGE_FONT.getWidth(WIN_MESSAGE)/2.0,
@@ -141,9 +147,11 @@ public class LevelOne extends Level{
         score.drawFinalScore();
     }
 
+    // generates weapons at a set frequency in between pipes
     protected void generateWeapon(){
         if (PIPE_FREQUENCEY/2 == frameCounter && Math.random() > 1 - WEAPON_SPAWN_RATE){
             System.out.println(weapons.toArray().length);
+            // 50% of the time Bomb is spawned 50% of the time rock is spawned
             if (Math.random() > 0.5){
                 weapons.add(new Bomb(ShadowFlap.SCREEN_WIDTH + PipeSet.PIPE_SPRIT_WIDTH/2));
             } else {
@@ -152,6 +160,7 @@ public class LevelOne extends Level{
         }
     }
 
+    // Generates pipes to be added to the level, 50% plastic pipe 50% of the time metal pipe.
     protected PipeSet generatePipe(){
         if (Math.random() > 0.5) {
             return new PlasticPipeSet(Levels.LEVEL_ONE);
@@ -160,6 +169,7 @@ public class LevelOne extends Level{
         }
     }
 
+    // gets the bird sprite relevant to level one.
     protected Bird generateBird(){
         return new LevelOneBird();
     }

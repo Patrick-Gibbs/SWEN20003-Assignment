@@ -27,10 +27,10 @@ public abstract class Weapon implements Colidable {
 
     private static final double SHOOT_SPEED = 5;
 
-    public Weapon(double shotStartXPossition){
+    public Weapon(double startXPossition){
          double startYPossition = (WEAPON_Y_LOWER_BOUND + Math.random() * (WEAPON_Y_UPPER_BOUND -
                  WEAPON_Y_LOWER_BOUND));
-         position = new Vector2(shotStartXPossition, startYPossition);
+         position = new Vector2(startXPossition, startYPossition);
     }
 
 

@@ -9,7 +9,7 @@ public class Score {
     private static final int MESSAGE_SCORE_GAP = 75;
     private static final Point SCORE_LOCATION = new Point(100, 100);
 
-    private final Font SCORE_FONT = new Font(ShadowFlap.FONT_PATH, ShadowFlap.FONT_SIZE);
+    private final Font SCORE_FONT = ShadowFlap.getInstance().MESSAGE_FONT;
 
     private int current_score = 0;
 

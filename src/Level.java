@@ -86,9 +86,9 @@ public abstract class Level{
                 drawLossMessage();
                 score.drawFinalScore();
         }
-        updateGameState(input, bird, pipes);
+        updateGameState(input);
     }
-    protected void updateGameState(Input input, Bird bird, ArrayList<PipeSet> pipes){
+    protected void updateGameState(Input input){
         switch (currentGameState) {
             case START_SCREEN:
                 if (input.isDown(Keys.SPACE)) {

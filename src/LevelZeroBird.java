@@ -6,11 +6,13 @@ public class LevelZeroBird extends Bird {
     private static final Image BIRD_WING_UP_SPRITE = new Image(BIRD_WING_UP_PATH);
     private static final Image BIRD_WING_DOWN_SPRITE = new Image(BIRD_WING_DOWN_PATH);
 
-
-    LevelZeroBird(){
+    /** Creates a bird specfic to level 0 initilised at the starting coordinates.
+     */
+    public LevelZeroBird(){
         super();
     }
-    /* Draws the bird at the on the screen at its current position, every 10 times the alternative sprite is used
+
+    /** Draws the bird at the on the screen at its current position, every 10 times the alternative sprite is used
    to give the flapping animation */
     @Override
     public Image getCurrentBirdSprite() {
