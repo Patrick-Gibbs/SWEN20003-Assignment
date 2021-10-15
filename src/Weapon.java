@@ -4,7 +4,6 @@ import bagel.Keys;
 import bagel.util.Rectangle;
 import bagel.util.Vector2;
 
-import java.util.ArrayList;
 /** Represnts wepeaon in shaddowflap game which can be picked up by the bird and used to destroy pipes. */
 public abstract class Weapon implements Colidable {
     protected Vector2 position;
@@ -76,7 +75,7 @@ public abstract class Weapon implements Colidable {
             position = bird.getBirdPossionVector();
             position = position.add(Vector2.right.mul(bird.getBoundingBoxs()[0].right() - position.asPoint().x));
         // If the weapon is shot it moves right to left. collision handled in level class.
-        } else if (isShot){
+        } else {
             position = position.add(Vector2.right.mul(SHOOT_SPEED * ShadowFlap.getInstance().getGameSpeed()));
             frameCounter++;
         }

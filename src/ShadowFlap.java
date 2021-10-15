@@ -28,7 +28,7 @@ public class ShadowFlap extends AbstractGame {
     public final Font MESSAGE_FONT = new Font(ShadowFlap.FONT_PATH, ShadowFlap.FONT_SIZE);
 
     // for time scale controls
-    private static final int MAX_GAME_SPEED = 4;
+    private static final int MAX_GAME_SPEED = 5;
     private boolean lKeyWasDown = false;
     private boolean kKeyWasDown = false;
     private double timeScale = 0;

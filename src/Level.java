@@ -1,7 +1,4 @@
-import bagel.Font;
-import bagel.Image;
-import bagel.Input;
-import bagel.Keys;
+import bagel.*;
 import bagel.util.Point;
 
 import java.util.ArrayList;
@@ -9,7 +6,6 @@ import java.util.ArrayList;
 /** Abstract class encapsulting the common game logic for level zero and level one.
  */
 public abstract class Level{
-    protected static final Image DEFUALT_BACKGROUND = new Image("res/level-0/background.png");
     protected static final String START_LEVEL_INSTRUCTION = "PRESS SPACE TO START";
     protected static final String LOSS_MESSAGE = "GAME OVER";
     public static final Point MESSAGE_LOCATION = new Point(ShadowFlap.SCREEN_WIDTH/2.0, ShadowFlap.SCREEN_HEIGHT/2.0 + ShadowFlap.FONT_SIZE/2.0);
@@ -84,6 +80,7 @@ public abstract class Level{
             case GAME_LOST:
                 drawLossMessage();
                 score.drawFinalScore();
+                break;
         }
         updateGameState(input);
     }

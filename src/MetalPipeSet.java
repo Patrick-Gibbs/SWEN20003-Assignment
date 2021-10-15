@@ -5,7 +5,6 @@ import bagel.Image;
  */
 public class MetalPipeSet extends PipeSet {
     private final Image PIPE_SPRIT = new Image("res/level-1/steelPipe.png");
-    double bottomOverhang = Math.random() * (ShadowFlap.SCREEN_HEIGHT - PIPE_GAP);
     private int flameCounter;
     private Flame flames;
     private static final int FRAMES_FLAME_SHOT = 30;

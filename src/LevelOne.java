@@ -12,7 +12,7 @@ public class LevelOne extends Level{
     private static final String SHOOT_INSTRUCTIONS = "PRESS 's' TO SHOOT";
     private static final String WIN_MESSAGE = "CONGRATULATIONS!";
     private static final int SHOOT_INSTRUCTIONS_GAP = 68;
-    private static final int LIVES = 10; //SHOIUDL BE 6 LIVES
+    private static final int LIVES = 6;
     private static final int SCORE_TO_WIN = 30;
     private static final double WEAPON_SPAWN_RATE = 0.4;
 
@@ -23,11 +23,11 @@ public class LevelOne extends Level{
      */
     public LevelOne(){
         bird = new LevelOneBird();
-        pipes = new ArrayList<PipeSet>();
+        pipes = new ArrayList<>();
         pipes.add(generatePipe());
         currentGameState = GameState.START_SCREEN;
         healthBar = new HealthBar(LIVES);
-        weapons = new ArrayList<Weapon>();
+        weapons = new ArrayList<>();
 
     }
 
@@ -41,8 +41,8 @@ public class LevelOne extends Level{
         generateWeapon();
 
         if(currentGameState == GameState.GAME_RUNNING) {
-            ArrayList<Weapon> weaponsToRemove = new ArrayList<Weapon>();
-            ArrayList<PipeSet> pipeSetToRemove = new ArrayList<PipeSet>();
+            ArrayList<Weapon> weaponsToRemove = new ArrayList<>();
+            ArrayList<PipeSet> pipeSetToRemove = new ArrayList<>();
 
             for (Weapon weapon : weapons) {
                 // updates the possitoin and state of weapon
@@ -76,7 +76,6 @@ public class LevelOne extends Level{
                         if (weapon.isShot && weapon.hasColsionOccured(pipe)) {
                             // Weapon destroys pipe and scores unless pipe is metal and weapon is rock.
                             if (!(pipe instanceof MetalPipeSet && weapon instanceof Rock)) {
-                                System.out.println('C');
                                 pipeSetToRemove.add(pipe);
                                 score.incrementScore();
                             }
@@ -86,7 +85,6 @@ public class LevelOne extends Level{
                     }
                 }
             }
-
             // Removes pipes and weapons that should no longer be in the game
             for (PipeSet pipe : pipeSetToRemove) {
                 pipes.remove(pipe);
@@ -114,13 +112,7 @@ public class LevelOne extends Level{
     // draws the relevant background on the screeen.
     @Override
     protected void drawBackground() {
-        // Draws city background unless game is lost, in which case we draw the default background.
-        if(currentGameState == GameState.GAME_LOST){
-            DEFUALT_BACKGROUND.draw(ShadowFlap.SCREEN_WIDTH / 2.0, ShadowFlap.SCREEN_HEIGHT / 2.0);
-        } else {
-            BACKGROUND.draw(ShadowFlap.SCREEN_WIDTH / 2.0, ShadowFlap.SCREEN_HEIGHT / 2.0);
-
-        }
+        BACKGROUND.draw(ShadowFlap.SCREEN_WIDTH / 2.0, ShadowFlap.SCREEN_HEIGHT / 2.0);
     }
 
     // draws the starting screen message

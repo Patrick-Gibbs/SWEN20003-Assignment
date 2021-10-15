@@ -8,7 +8,7 @@ public class LevelZero extends Level {
     private static final Image BACKGROUND = new Image("res/level-0/background.png");
     private static final String WIN_MESSAGE = "LEVEL UP!";
     private static final int LIVES = 3;
-    private static final int SCORE_TO_WIN = 1;
+    private static final int SCORE_TO_WIN = 10;
     private static final int WIN_SCREEN_FRAMES = 20;
 
     /** Creates a new instance of Level Zero initalised at the starting screen.
@@ -16,7 +16,7 @@ public class LevelZero extends Level {
     public LevelZero() {
       super();
         bird = new LevelZeroBird();
-        pipes = new ArrayList<PipeSet>();
+        pipes = new ArrayList<>();
         pipes.add(new PlasticPipeSet(Levels.LEVEL_ZERO));
         currentGameState = GameState.START_SCREEN;
         healthBar = new HealthBar(LIVES);
@@ -37,13 +37,11 @@ public class LevelZero extends Level {
     @Override
     protected void updateGameState(Input input){
         super.updateGameState(input);
-        switch (currentGameState){
-            case GAME_WON:
-                if (frameCounter == WIN_SCREEN_FRAMES){
-                    ShadowFlap.getInstance().levelUp();
-                }
-                frameCounter++;
-                break;
+        if (currentGameState == GameState.GAME_WON) {
+            if (frameCounter == WIN_SCREEN_FRAMES) {
+                ShadowFlap.getInstance().levelUp();
+            }
+            frameCounter++;
         }
     }
 
@@ -55,7 +53,7 @@ public class LevelZero extends Level {
     // draws the level relevant background.
     @Override
     protected void drawBackground() {
-        BACKGROUND.draw(ShadowFlap.SCREEN_WIDTH / 2.0, ShadowFlap.SCREEN_HEIGHT / 2.0);;
+        BACKGROUND.draw(ShadowFlap.SCREEN_WIDTH / 2.0, ShadowFlap.SCREEN_HEIGHT / 2.0);
     }
 
     //check if the level has been won.
