@@ -2,6 +2,9 @@ import bagel.Image;
 
 import java.awt.*;
 
+/** Represents the healthbar in game which shows the player how many lives remain. if the player runs out of
+ * lives they lose the game.
+ */
 public class HealthBar{
     private static final String FULL_LIFE_PATH = "res/level/fullLife.png";
     private static final String EMPTY_LIFE_PATH = "res/Level/noLife.png";

@@ -1,5 +1,8 @@
 import bagel.Image;
 
+/** Represents plastic pipes the bird must pass through to score points, used in both levels, in level one can
+ * be destroyed by Rock or Bomb.
+ */
 public class PlasticPipeSet extends PipeSet {
     //Defines the distance end of a pipe from the top/bottem of the screen
     private static final double MID_PIPE_OVERHANG = 300;

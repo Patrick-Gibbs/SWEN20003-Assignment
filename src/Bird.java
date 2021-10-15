@@ -14,8 +14,6 @@ public abstract class Bird implements Colidable {
     private static final int START_Y = 350;
     private static final String BIRD_WING_UP_PATH = "res/level-0/birdWingUp.png";
     private static final String BIRD_WING_DOWN_PATH = "res/level-0/birdWingDown.png";
-    private static final Image BIRD_WING_UP_SPRITE = new Image(BIRD_WING_UP_PATH);
-    private static final Image BIRD_WING_DOWN_SPRITE = new Image(BIRD_WING_DOWN_PATH);
 
 
 

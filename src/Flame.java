@@ -2,7 +2,7 @@ import bagel.DrawOptions;
 import bagel.Image;
 import bagel.util.Rectangle;
 import bagel.util.Vector2;
-
+/** Represents the flame which may be shot out of metel pipes, flame causes bird to lose life apon colision */
 public class Flame implements Colidable{
     private static final DrawOptions FLAME_ROTATION = new DrawOptions().setRotation(Math.PI);
     private static final Image FLAME_SPRITE = new Image("res/level-1/flame.png");

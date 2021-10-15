@@ -1,5 +1,4 @@
 import bagel.Image;
-import bagel.util.Rectangle;
 
 /** Represents the Bomb weapon which is used in Level two.
  *  Bombs can be picked up by the bird and fired to destroy all types of pipes.

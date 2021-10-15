@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public abstract class Level{
     protected static final Image DEFUALT_BACKGROUND = new Image("res/level-0/background.png");
-    protected static final String START_LEVEL_INSTRUCTION = "PRESS SPACCE TO START";
+    protected static final String START_LEVEL_INSTRUCTION = "PRESS SPACE TO START";
     protected static final String LOSS_MESSAGE = "GAME OVER";
     public static final Point MESSAGE_LOCATION = new Point(ShadowFlap.SCREEN_WIDTH/2.0, ShadowFlap.SCREEN_HEIGHT/2.0 + ShadowFlap.FONT_SIZE/2.0);
 
@@ -53,12 +53,12 @@ public abstract class Level{
                 bird.updateBird(input);
                 score.updateScore(pipes);
                 healthBar.drawHealthBar();
-
+                // if bird leaves the screen life is lost and bird respawned.
                 if (isOutOfBounds(bird)) {
                     healthBar.decrementLife();
                     bird = generateBird();
                 }
-
+                // Checks each pipe for collision with bird.
                 PipeSet pipeToRemove = null;
                 for (PipeSet pipe : pipes) {
                     pipe.updatePipes();
@@ -70,11 +70,10 @@ public abstract class Level{
                 if (pipeToRemove != null) {
                     pipes.remove(pipeToRemove);
                 }
-
+                // Spawns pipes, Removes pipes as they leave the screen.
                 if (frameCounter == PIPE_FREQUENCEY) {
                     pipes.add(generatePipe());
                     if (pipes.size() > 4) {
-                        System.out.println(pipes.toArray().length);
                         pipes.remove(0);
                     }
                     frameCounter = 0;
@@ -88,24 +87,27 @@ public abstract class Level{
         }
         updateGameState(input);
     }
+    // Update the state of the level e.g. win, lose, game running.
     protected void updateGameState(Input input){
         switch (currentGameState) {
+            //Game starts once space is pressed
             case START_SCREEN:
                 if (input.isDown(Keys.SPACE)) {
                     currentGameState = GameState.GAME_RUNNING;
                 }
                 break;
             case GAME_RUNNING:
-                for (PipeSet pipe : pipes) {
-                    if (healthBar.getHealthRemaining() == 0) {
-                        currentGameState = GameState.GAME_LOST;
-                        break;
-                    }
+                // Game lost once lives run out
+                if (healthBar.getHealthRemaining() == 0) {
+                    currentGameState = GameState.GAME_LOST;
+                    break;
                 }
+                // Level won once a certain score is reached.
                 if (isLevelUp(score)) {
                     frameCounter = 0;
                     currentGameState = GameState.GAME_WON;
                 }
+            // Exit from game lost screen with ESCAPE key
             case GAME_LOST:
                 if (input.isDown(Keys.ESCAPE)){
                     System.exit(0);
@@ -113,17 +115,20 @@ public abstract class Level{
         }
     }
 
+    // Checks if the bird has left the screen.
     protected boolean isOutOfBounds(Bird bird){
         // Out of bounds collision
         double birdHeight = bird.getBirdPossionVector().y;
         return (birdHeight < 0 || birdHeight >= ShadowFlap.SCREEN_HEIGHT);
     }
 
+    // Draws the message on the loss screen
     private void drawLossMessage(){
         Font messageFont = ShadowFlap.getInstance().MESSAGE_FONT;
         messageFont.drawString(LOSS_MESSAGE, MESSAGE_LOCATION.x - messageFont.getWidth(LOSS_MESSAGE)/2.0,
                 MESSAGE_LOCATION.y);
     }
+    // Draws the message on the start screen.
     protected void drawStartScreen() {
         Font currentFont = ShadowFlap.getInstance().MESSAGE_FONT;
         currentFont.drawString(START_LEVEL_INSTRUCTION, MESSAGE_LOCATION.x - currentFont.getWidth(START_LEVEL_INSTRUCTION)/2.0,

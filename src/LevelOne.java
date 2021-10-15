@@ -150,7 +150,6 @@ public class LevelOne extends Level{
     // generates weapons at a set frequency in between pipes
     protected void generateWeapon(){
         if (PIPE_FREQUENCEY/2 == frameCounter && Math.random() > 1 - WEAPON_SPAWN_RATE){
-            System.out.println(weapons.toArray().length);
             // 50% of the time Bomb is spawned 50% of the time rock is spawned
             if (Math.random() > 0.5){
                 weapons.add(new Bomb(ShadowFlap.SCREEN_WIDTH + PipeSet.PIPE_SPRIT_WIDTH/2));

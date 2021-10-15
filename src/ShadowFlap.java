@@ -3,7 +3,7 @@ import bagel.util.Point;
 
 /**
  * Skeleton Code for SWEN20003 Project 1, Semester 2, 2021
- *
+ * Shaddow Flap game where bird must move through pipes to score points.
  * Please filling your name below
  * @author: Patrick Gibbs 1083438
  */
@@ -20,7 +20,10 @@ public class ShadowFlap extends AbstractGame {
     public static final int FONT_SIZE = 48;
     /** The location at which messages are displayed to player e.g. GAMEOVER */
     public static final Point MESSAGE_LOCATION = new Point(SCREEN_WIDTH/2.0, SCREEN_HEIGHT/2.0 + FONT_SIZE/2.0);
-    private static final String FONT_PATH = "res/font/slkscr.ttf";
+    /** Path to font used throughout game, this is required public becouse the Font class is glitchy and can bug out
+     * as a static variable.
+     */
+    public static final String FONT_PATH = "res/font/slkscr.ttf";
     /** Font used throughout the game. */
     public final Font MESSAGE_FONT = new Font(ShadowFlap.FONT_PATH, ShadowFlap.FONT_SIZE);
 

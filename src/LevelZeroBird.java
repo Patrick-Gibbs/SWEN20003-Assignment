@@ -1,5 +1,5 @@
 import bagel.Image;
-
+/** Represents bird used in level zero, has a unique sprite. */
 public class LevelZeroBird extends Bird {
     private static final String BIRD_WING_UP_PATH = "res/level-0/birdWingUp.png";
     private static final String BIRD_WING_DOWN_PATH = "res/level-0/birdWingDown.png";

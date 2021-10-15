@@ -11,9 +11,9 @@ public abstract class PipeSet implements Colidable {
     private static final Image DEFULT_SPRITE = new Image("res/level/plasticPipe.png");
 
 
-
     protected static final double PIPE_SPRIT_HEIGHT = DEFULT_SPRITE.getHeight();
-    public static final double PIPE_SPRIT_WIDTH = DEFULT_SPRITE.getWidth();
+    /** The width of the pipe sprites */
+    protected static final double PIPE_SPRIT_WIDTH = DEFULT_SPRITE.getWidth();
 
     //calculation required as sprite is overly long, and drawn from the middle
     //initially place on the far right of screen

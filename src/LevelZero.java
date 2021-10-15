@@ -43,7 +43,6 @@ public class LevelZero extends Level {
                     ShadowFlap.getInstance().levelUp();
                 }
                 frameCounter++;
-                System.out.println(frameCounter);
                 break;
         }
     }

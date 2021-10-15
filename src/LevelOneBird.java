@@ -1,5 +1,5 @@
 import bagel.Image;
-
+/** Represents the bird used in level one, has its unque sprite and can carry weapons. */
 public class LevelOneBird extends Bird {
     private static final String BIRD_WING_UP_PATH = "res/level-1/birdWingUp.png";
     private static final String BIRD_WING_DOWN_PATH = "res/level-1/birdWingDown.png";
