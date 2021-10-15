@@ -48,7 +48,6 @@ public abstract class Level{
             case GAME_RUNNING:
                 bird.updateBird(input);
                 score.updateScore(pipes);
-                healthBar.drawHealthBar();
                 // if bird leaves the screen life is lost and bird respawned.
                 if (isOutOfBounds(bird)) {
                     healthBar.decrementLife();
@@ -76,6 +75,7 @@ public abstract class Level{
                 }
                 frameCounter++;
                 score.drawScore();
+                healthBar.drawHealthBar();
                 break;
             case GAME_LOST:
                 drawLossMessage();
