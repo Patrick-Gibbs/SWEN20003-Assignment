@@ -65,7 +65,7 @@ public abstract class PipeSet implements Colidable {
 
     /** Checks if there has been a collision with a target and a flame assoitaed with the pipe (if there is a flame
      * associated)
-     * @param target
+     * @param target checks if collison has occured wit the target.
      * @return boolean, whether a collision has occurred between the target and the flame.
      */
     public abstract boolean collisoinWithFlame(Colidable target);
@@ -84,11 +84,12 @@ public abstract class PipeSet implements Colidable {
         this.pointsCounted = pointsCounted;
     }
 
-    @Override
+
     /** checks if a collision has occured between the pipes and a target object
-     * @param Colidable The object that a colison may have occured with.
+     * @param target The object that a colison may have occured with.
      * @return boolean If a collsion has occured
      */
+    @Override
     public boolean hasColsionOccured(Colidable target) {
         Rectangle topPipeRectangle = DEFULT_SPRITE.getBoundingBoxAt(bottomPipeVector.asPoint());
         Rectangle bottomPipeRectangle = DEFULT_SPRITE.getBoundingBoxAt(topPipeVector.asPoint());

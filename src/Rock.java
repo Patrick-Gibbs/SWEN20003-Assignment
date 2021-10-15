@@ -6,7 +6,7 @@ public class Rock extends Weapon{
     private static final int SHOOT_RANGE = 25;
 
     /** Creates a new rock at a specified x posstion, y posstion if generated randomly on the screen.
-     * @param startXPossition
+     * @param startXPossition specifed X posstion to create rock.
      */
     public Rock(double startXPossition){
         super(startXPossition);
